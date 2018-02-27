@@ -1,0 +1,55 @@
+---
+title: "Coheed and Cambria Tour Map"
+author: "Jared Brooks"
+date: "2/27/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Coheed and Cambria is a band that I like, and they are going on tour this summer. Here are all the cities and tour dates in July (there are more in August, but I got tired of copy-pasting all this stuff). 
+
+```{r cars}
+suppressMessages(library(leaflet))
+
+tourLatLong <- data.frame(
+  lat = c(25.776260, 27.993181, 30.322274, 33.876972, 36.159758, 35.773801, 35.239954, 39.284033, 42.348175, 39.958528, 40.393798, 40.572896, 40.446136, 39.969803, 44.975161, 41.864336, 42.564112, 41.496330, 36.302676),
+  lng = c(-80.186097, -82.365149, -81.637816, -84.396959, -86.771794, -78.643087, -80.844648, -76.604426, -71.036641, -75.137541, -74.175203, -73.987915, -80.012283, -83.009952, -93.263567, -87.609099, -82.976197, -81.702921, -94.183726)
+)
+
+tourSites <- c(
+  "<a href='http://smarturl.it/coca0706'>BAYFRONT PARK AMPHITHEATER<br> 07/06</a>",
+  "<a href='http://smarturl.it/coca0707'>MIDFLORIDA CREDIT UNION AMPHITHEATRE<br> 07/07</a>",
+  "<a href='http://smarturl.it/coca0708'>DAILY'S PLACE AMPHITHEATER<br> 07/08</a>",
+  "<a href='http://smarturl.it/coca0710'>CHASTAIN PARK AMPHITHEATER<br> 07/10</a>",
+  "<a href='http://smarturl.it/coca0711'>ASCEND AMPHITHEATER<br> 07/11</a>",
+  "<a href='http://smarturl.it/coca0713'>RED HAT AMPHITHEATER<br> 07/13</a>",
+  "<a href='http://smarturl.it/coca0714'>CHARLOTTE METRO CREDIT UNION AMPHITHEATRE<br> 07/14</a>",
+  "<a href='http://smarturl.it/coca0715'>PIER SIX PAVILION<br> 07/15</a>",
+  "<a href='http://smarturl.it/coca0717'>BLUE HILLS BANK PAVILION<br> 07/17</a>",
+  "<a href='http://smarturl.it/coca0718'>PENN'S LANDING - FESTIVAL PIER<br> 07/18</a>",
+  "<a href='http://smarturl.it/coca0719'>PNC BANK ARTS CENTER<br> 07/19</a>",
+  "<a href='http://smarturl.it/coca0721'>FORD AMPHITHEATER AT CONEY ISLAND<br> 07/21</a>",
+  "<a href='http://smarturl.it/coca0722'>STAGE AE - OUTDOORS<br> 07/22</a>",
+  "<a href='http://smarturl.it/coca0723'>EXPRESS LIVE! OUTDOOR AMPHITHEATRE<br> 07/23</a>",
+  "<a href='http://smarturl.it/coca0725'>ARMORY, MINNEAPOLIS, MN<br> 07/25</a>",
+  "<a href='http://smarturl.it/coca0726'>HUNTINGTON BANK PAVILION AT NORTHERLY ISLAND<br> 07/26</a>",
+  "<a href='http://smarturl.it/coca0727'>MICHIGAN LOTTERY AMPHITHEATRE AT FREEDOM HILL<br> 07/27</a>",
+  "<a href='http://smarturl.it/coca0729'>JACOB'S PAVILION AT NAUTICA FLATS<br> 07/29</a>",
+  "<a href='http://smarturl.it/coca0731'>WALMART AMP, ROGERS, AR<br> 07/31</a>"
+)
+
+icons <- awesomeIcons(
+  icon = 'glyphicon-music',
+  iconColor = 'black',
+  library = 'glyphicon'
+)
+
+tourLatLong %>%
+  leaflet() %>%
+  addTiles() %>%
+  addAwesomeMarkers(icon = icons, popup = tourSites)
+
+```
