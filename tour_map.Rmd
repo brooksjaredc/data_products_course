@@ -2,21 +2,25 @@
 title: "Coheed and Cambria Tour Map"
 author: "Jared Brooks"
 date: "2/27/2018"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Coheed and Cambria is a band that I like, and they are going on tour this summer. Here are all the cities and tour dates in July (there are more in August, but I got tired of copy-pasting all this stuff). 
+Coheed and Cambria is a band that I like, and they are going on tour this summer. Here are all the cities and tour dates. 
 
-```{r cars}
+Expand the code here to see all the GPS and URL inputs:
+
+```{r inputs}
 suppressMessages(library(leaflet))
 
 tourLatLong <- data.frame(
-  lat = c(25.776260, 27.993181, 30.322274, 33.876972, 36.159758, 35.773801, 35.239954, 39.284033, 42.348175, 39.958528, 40.393798, 40.572896, 40.446136, 39.969803, 44.975161, 41.864336, 42.564112, 41.496330, 36.302676),
-  lng = c(-80.186097, -82.365149, -81.637816, -84.396959, -86.771794, -78.643087, -80.844648, -76.604426, -71.036641, -75.137541, -74.175203, -73.987915, -80.012283, -83.009952, -93.263567, -87.609099, -82.976197, -81.702921, -94.183726)
+  lat = c(25.776260, 27.993181, 30.322274, 33.876972, 36.159758, 35.773801, 35.239954, 39.284033, 42.348175, 39.958528, 40.393798, 40.572896, 40.446136, 39.969803, 44.975161, 41.864336, 42.564112, 41.496330, 36.302676, 29.577058, 30.134897, 32.873737, 38.550931, 40.774553, 34.119735, 36.109349, 33.658612, 33.448915),
+  lng = c(-80.186097, -82.365149, -81.637816, -84.396959, -86.771794, -78.643087, -80.844648, -76.604426, -71.036641, -75.137541, -74.175203, -73.987915, -80.012283, -83.009952, -93.263567, -87.609099, -82.976197, -81.702921, -94.183726, -95.643293, -97.638333, -96.944930, -90.415097, -111.906407, -118.296068, -115.153068, -117.730587, -112.079379)
 )
 
 tourSites <- c(
@@ -38,9 +42,23 @@ tourSites <- c(
   "<a href='http://smarturl.it/coca0726'>HUNTINGTON BANK PAVILION AT NORTHERLY ISLAND<br> 07/26</a>",
   "<a href='http://smarturl.it/coca0727'>MICHIGAN LOTTERY AMPHITHEATRE AT FREEDOM HILL<br> 07/27</a>",
   "<a href='http://smarturl.it/coca0729'>JACOB'S PAVILION AT NAUTICA FLATS<br> 07/29</a>",
-  "<a href='http://smarturl.it/coca0731'>WALMART AMP, ROGERS, AR<br> 07/31</a>"
+  "<a href='http://smarturl.it/coca0731'>WALMART AMP, ROGERS, AR<br> 07/31</a>",
+  "<a href='http://smarturl.it/coca0802'>SMART FINANCIAL CENTRE<br> 08/02</a>",
+  "<a href='http://smarturl.it/coca0803'>AUSTIN 360 AMPHITHEATER<br> 08/03</a>",
+  "<a href='http://smarturl.it/coca0804'>THE PAVILION AT TOYOTA MUSIC FACTORY<br> 08/04</a>",
+  "<a href='http://smarturl.it/coca0806'>SCULPTURE PARK<br> 08/06</a>",
+  "<a href='http://smarturl.it/coca0807'>UNION EVENT CENTER<br> 08/07</a>",
+  "<a href='http://smarturl.it/coca0809'>THE GREEK THEATRE<br> 08/09</a>",
+  "<a href='http://smarturl.it/coca0810'>HARD ROCK HOTEL & CASINO - THE JOINT<br> 08/10</a>",
+  "<a href='http://smarturl.it/coca0811'>FIVE POINT AMPHITHEATRE<br> 08/11</a>",
+  "<a href='http://smarturl.it/coca0812'>COMERICA THEATRE<br> 08/12</a>"
 )
 
+```
+
+Expand the code here to see the leaflet commands:
+
+```{r draw}
 icons <- awesomeIcons(
   icon = 'glyphicon-music',
   iconColor = 'black',
@@ -51,5 +69,4 @@ tourLatLong %>%
   leaflet() %>%
   addTiles() %>%
   addAwesomeMarkers(icon = icons, popup = tourSites)
-
 ```
