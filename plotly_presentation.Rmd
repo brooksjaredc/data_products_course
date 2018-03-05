@@ -5,13 +5,20 @@ date: "3/5/2018"
 output: ioslides_presentation
 ---
 
+<style type="text/css">
+
+h3 {
+   font-size: 20px;
+}
+</style>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Poisson Histogram
 
-Here we are simply plotting histograms of Poisson distributions with varying values of lambda toggled with the slider. We see that as the value of lambda increases, the distribution looks more normal.
+### Here we are simply plotting histograms of Poisson distributions with varying values of lambda toggled with the slider. We see that as the value of lambda increases, the distribution looks more normal.
 
 ```{r}
 suppressMessages(library(plotly))
@@ -72,7 +79,7 @@ p
 
 ## 2D Poisson Histogram
 
-Here we see a 2D Possion histogram where the x and y values are both Poisson distributions of the same size and lambda, plotted with a zsmooth function.
+### Here we see a 2D Possion histogram where the x and y values are both Poisson distributions of the same size and lambda, plotted with a zsmooth function.
 
 ```{r}
 aval[1][[1]]$visible = TRUE
@@ -94,7 +101,7 @@ for (i in 1:20) {
   #             yaxis=list(showgrid=FALSE, zeroline=FALSE),
   #             showlegend=FALSE)
   p <- add_histogram2d(p, x = aval[i][[1]]$x, y = aval[i][[1]]$y, zsmooth='best',
-                     visible = aval[i][[1]]$visible, name = aval[i][[1]]$name)
+                     visible = aval[i][[1]]$visible, name = aval[i][[1]]$name, showscale = FALSE)
                      #hoverinfo = 'name') #%>%
     #add_histogram(x = aval[i][[1]]$y,
     #                 visible = aval[i][[1]]$visible, name = aval[i][[1]]$name,
