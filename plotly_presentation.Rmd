@@ -69,7 +69,7 @@ for (i in 1:20) {
 ```{r}
 p <- p %>%
   layout(sliders = list(list(active = 0,
-                             currentvalue = list(prefix = "Frequency: "),
+                             currentvalue = list(prefix = "Lambda slider: "),
                              steps = steps)))
 ```
 
@@ -117,7 +117,7 @@ for (i in 1:20) {
 ```{r}
 p <- p %>%
   layout(sliders = list(list(active = 0,
-                             currentvalue = list(prefix = "Frequency: "),
+                             currentvalue = list(prefix = "Lambda slider: "),
                              steps = steps)))
 ```
 
