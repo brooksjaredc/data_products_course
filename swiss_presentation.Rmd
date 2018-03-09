@@ -1,0 +1,67 @@
+---
+title: "Developing Data Products Course Project"
+author: "Jared Brooks"
+date: "3/9/2018"
+output: ioslides_presentation
+---
+
+<style type="text/css">
+
+h3 {
+   font-size: 20px;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Swiss Fertility and Socioeconomic Indicators (1888) Data
+
+### Standardized fertility measure and socio-economic indicators for each of 47 French-speaking provinces of Switzerland at about 1888. Includes a data frame with 47 observations on 6 variables, each of which is in percent, i.e., in [0, 100].
+
+```{r str, echo=TRUE}
+data(swiss)
+str(swiss)
+```
+
+## Summary Plot of Swiss data
+
+### The first tab of the Shiny application allows the user to the choose x- and y-axes for a scatterplot, along with a regression line to more deeply explore the distributions and relationships in the data.
+
+```{r plot}
+
+plot(swiss)
+
+```
+
+## Fitting a Model
+
+### The second tab in the Shiny app allows the user to fit a machine learning model to predict the Fertility for provinces. The user can specify the **size of the test/holdout set**, which of the **features to use**, and can choose from **three different machine learning algorithms**: a generalized linear model (GLM), a k-nearest neighbors (KNN) regressor, or a random forest (RF) regressor.
+<br>
+
+### This gives the user many options for machine learning on the dataset by using simple widgets and hiding the rest of the coding details from them.
+
+## Example of Fit results
+
+### This is an example of the fit result plot using a GLM with all the features and a test set size of 30%. We plot the actual fertility values on the x-axis and the fitted values on the y-axis. We also include the mean squared error (MSE) in red text on the plot.
+
+```{r pressure}
+library(ggplot2)
+suppressMessages(library(caret))
+data(swiss)
+
+set.seed(39592)
+fold <- createDataPartition(swiss$Fertility, p=0.7, list = F)
+train <- swiss[fold,]
+test <- swiss[-fold,]
+mod_glm <- train(Fertility~.,data = train,method='glm')
+pred_glm <- predict(mod_glm, newdata=test)
+r2_glm <- (sum((pred_glm-test$Fertility)^2))/length(test)
+r2_glm <- paste0('MSE = ',r2_glm)
+p <- qplot(test$Fertility,pred_glm)
+p <- p + annotate("text", label = r2_glm, x = 75, y = 80, size = 6, colour = "red")
+p <- p + geom_smooth(method = loess)
+p
+```
+
